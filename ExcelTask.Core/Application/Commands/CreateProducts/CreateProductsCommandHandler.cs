@@ -21,7 +21,7 @@ namespace ExcelTask.Core.Application.Commands.CreateProducts
             }
             catch (DbUpdateException ex)
             {
-                throw new Exception($"Ошибка при сохранении данных: {ex.Message}");
+                throw new Exception($"Error while saving products: {ex.Message}");
             }
 
         }

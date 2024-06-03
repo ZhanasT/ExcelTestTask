@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  exceltaskapi:
+    image: exceltaskapi
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: exceltaskapi
+    hostname: exceltaskapi
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - 5010:5010

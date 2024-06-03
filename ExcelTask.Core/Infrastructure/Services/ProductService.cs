@@ -1,6 +1,5 @@
 ﻿using ExcelTask.Core.Application.Commands.CreateProducts;
 using ExcelTask.Core.Application.Commands.TryUpsertUnitOfMeasure;
-using ExcelTask.Core.Application.Persistence;
 using ExcelTask.Core.Application.Services;
 using ExcelTask.Core.Domain;
 using MediatR;

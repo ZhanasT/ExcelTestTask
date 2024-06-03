@@ -1,18 +1,23 @@
 ﻿using ExcelTask.Core.Application.Models;
 using ExcelTask.Core.Application.Persistence;
+using ExcelTask.Core.Application.Queries.GetAllProductGroupModels;
+using ExcelTask.Core.Application.Queries.GetProductGroupModelById;
 using ExcelTask.Core.Application.Services;
 using ExcelTask.Core.Domain;
+using MediatR;
 
 namespace ExcelTask.Core.Infrastructure.Services
 {
     public class ProductGroupService : IProductGroupService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ISender _mediator;
         private const decimal MaxGroupPrice = 200m;
 
-        public ProductGroupService(IUnitOfWork unitOfWork)
+        public ProductGroupService(IUnitOfWork unitOfWork, ISender mediator)
         {
             _unitOfWork = unitOfWork;
+            _mediator = mediator;
         }
 
         public async Task<int> CreateGroupProducts()
@@ -81,7 +86,7 @@ namespace ExcelTask.Core.Infrastructure.Services
         {
             try
             {
-                return await _unitOfWork.ProductGroupRepository.GetAllGroupsAsync();
+                return await _mediator.Send(new GetAllProductGroupModelQuery());
             }
             catch (Exception ex)
             {
@@ -93,7 +98,7 @@ namespace ExcelTask.Core.Infrastructure.Services
         {
             try
             {
-                return await _unitOfWork.ProductGroupRepository.GetGroupByIdAsync(id);
+                return await _mediator.Send(new GetProductGroupModelByIdQuery { Id = id });
             }
             catch (Exception ex)
             {
